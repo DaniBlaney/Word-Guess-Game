@@ -4,17 +4,17 @@ var newGameButton = document.getElementById('new-game-button');
 var placeholders = document.getElementById('placeholders');
 var guessedLetters = document.getElementById('guessed-letters');
 var guessesLeft = document.getElementById('guesses-left');
-var wins = document.getElementById('wins');
-var losses = document.getElementById('losses');
-
+var winsHtml = document.getElementById('wins');
+var lossesHtml = document.getElementById('losses');
+var themesong = document.getElementById('themesong');
 
 //Create variables (words, wins, losses, incorrect letters)
 var characterNameBank = ["Darth Vader", "Princess Leia", "Luke Skywalker", "Obi-Wan Kenobi", "Han Solo", "Chewbacca", "Greedo", "Boba Fett", "Jabba the Hutt", "Jar Jar Binks", "Yoda"];
 var guessesLeft = 25;
 var pickedCharacterName = '';
 var gameRunning = false;
-var wins = 0;
-var losses = 0;
+var winsCount = 0;
+var lossesCount = 0;
 var pickedWordPlaceholderArr = [];
 var guessedLetterBank = [];
 var incorrectLetterBank = [];
@@ -78,21 +78,26 @@ function letterGuess(letter) {
 //check losses..
 function checkLoss() {
   if (guessesLeft === 0){
-    losses++;
-    gameRunning=false;
-    losses.textContent = losses;
-    placeholders.textContent= pickedCharacterName
+    lossesCount++;
+    gameRunning = false;
+    lossesHtml.textContent = lossesCount;
+    placeholders.textContent = pickedCharacterName
   }
+  if(lossesCount){// Your condition
+    document.getElementById("yodaAudio").play(); // Location t
 }
 checkWin();
 //check wins
 function checkWin() {
   if (pickedCharacterName.toLowerCase()=== pickedWordPlaceholderArr.join('').toLowerCase)
 {
-  wins++;
-  gameRunning=false;
-  wins.textContent=wins;
+  winsCount++;
+  gameRunning = false;
+  winsHtml.textContent = winsCount;
 }
+if(winsCount){// Your condition
+  document.getElementById("blasterAudio").play(); // Location t
+
 }
 
 //incorrect letter
@@ -110,16 +115,13 @@ function checkIncorrect(letter) {
   }
 
   //play sound when letters are guessed
-function playSound(soundfile){
-  document.getElementById("sound").innerHTML="<embed src=\""+soundfile+"\" hidden=\"true\" autostart=\"true\" loop=\"false\"/>";
-}
 
 if(guessedLetterBank){// Your condition
-  playSound("./assets/images/yodalaughing.mp3"); // Location to your sound file
+  document.getElementById("yodaAudio").play(); // Location to your sound file
 }
 
 if(incorrectLetterBank){// Your condition
-  playSound("./assets/images/dontdothat.mp3"); // Location to your sound file
+  document.getElementById("dontDoAudio").play(); // Location to your sound file
 }
 
 
@@ -133,4 +135,8 @@ document.onkeyup = function(event) {
   if (event.keyCode >= 65 && event.keyCode <= 90) {
     letterGuess(event.key);
   }
+}
+
+window.onload = function() {
+  document.getElementById("themesong").play();
 }
