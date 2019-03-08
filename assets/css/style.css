@@ -1,0 +1,55 @@
+body {
+  background-image: url("../images/space.jpg");
+  background-color: #cccccc;
+  background-size: cover;
+
+}
+
+h2, h3 {
+  color: white;
+}
+
+h1 {
+  font-family: Starjout;
+  font-size: 60px;
+}
+
+#new-game-button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: block;
+  background-color: teal;
+  font-size: 20px;
+  color: gray;
+  text-transform: uppercase;
+  padding: 20px;
+  border: 2px;
+  box-shadow: 0 5px grey;
+}
+
+#new-game-button:hover {
+  box-shadow: 0 2px grey;
+  top: 2px;
+
+}
+
+#placeholders {
+  letter-spacing: 6px;
+  font-size: 35px;
+}
+
+#placeholder-section {
+  background-color: grey;
+  opacity: .5;
+}
+
+@font-face {
+  font-family: Starjout;
+  src: url("../images/Starjout.ttf");
+}
+
+@font-face {
+  font-family: Starjout;
+  src: url("../images/Starjout.eot");
+}
