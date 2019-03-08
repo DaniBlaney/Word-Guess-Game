@@ -12,6 +12,7 @@ h2, h3 {
 h1 {
   font-family: Starjout;
   font-size: 60px;
+  background-color: white;
 }
 
 #new-game-button {
@@ -42,6 +43,15 @@ h1 {
 #placeholder-section {
   background-color: grey;
   opacity: .5;
+}
+
+.navbar {
+  width: 100%;
+}
+
+.navbar-brand {
+  font-size: .75rem;
+  text-align: center;
 }
 
 @font-face {
