@@ -137,6 +137,5 @@ document.onkeyup = function(event) {
   }
 }
 
-window.onload = function() {
-  document.getElementById("themesong").play();
-}
+{ window.addEventListener('click', function () { document.getElementById("themesong").play();
+});}
