@@ -102,14 +102,15 @@ function checkWin() {
 
 //incorrect letter
 function checkIncorrect(letter) {
+  //checks if letter is in wordplaceholderarr both capital and lowercase letters
   if (pickedWordPlaceholderArr.indexOf(letter.toLowerCase()) === -1 &&
-  pickedWordPlaceholderArr.indexOf(letter.toUpperCase()) === -1);
+  pickedWordPlaceholderArr.indexOf(letter.toUpperCase()) === -1)
   {
     //decreases guesses counter
     guessesLeft --;
     //adds the incorrect letter to bank
     incorrectLetterBank.push(letter);
-    guessedLetters.textContent = incorrectLetterBank.join('');
+    guessedLetters.textContent = incorrectLetterBank.join(' ');
     //writes how many guesses left to dom
     guessesLeft.textContent = guessesLeft;
   }
@@ -124,8 +125,8 @@ if(incorrectLetterBank){// Your condition
   document.getElementById("dontDoAudio").play(); // Location to your sound file
 }
 
-
 }
+
 checkLoss();
 
 //new game button event listener...
