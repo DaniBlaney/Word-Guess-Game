@@ -10,7 +10,7 @@ var themesong = document.getElementById('themesong');
 
 //Create variables (words, wins, losses, incorrect letters)
 var characterNameBank = ["Darth Vader", "Princess Leia", "Luke Skywalker", "Obi-Wan Kenobi", "Han Solo", "Chewbacca", "Greedo", "Boba Fett", "Jabba the Hutt", "Jar Jar Binks", "Yoda"];
-var guessesLeftCounter = 25;
+var guessesLeftCounter = 10;
 var pickedCharacterName = '';
 var gameRunning = false;
 var winsCount = 0;
@@ -23,7 +23,7 @@ var incorrectLetterBank = [];
 function newGame() {
   //resetting all the game info
   gameRunning = true;
-  guessesLeftCounter = 25;
+  guessesLeftCounter = 10;
   guessedLetterBank = [];
   incorrectLetterBank = [];
   pickedWordPlaceholderArr = [];
@@ -64,6 +64,33 @@ function letterGuess(letter) {
     placeholders.textContent = pickedWordPlaceholderArr.join('');
     checkIncorrect(letter);
 
+    setTimeout(function(){
+      if (pickedWordPlaceholderArr.join('') === pickedCharacterName) {
+        winsCount++;
+        gameRunning = false;
+        winsHtml.textContent = winsCount;
+        console.log(winsCount)
+        document.getElementById("yodaAudio").pause();
+        document.getElementById("wellTrainedAudio").play();
+        alert("You Win!")
+        document.getElementById("wellTrainedAudio").pause();
+        newGame()
+      }
+
+      if(guessesLeftCounter === 1) {
+        lossesCount++;
+        gameRunning = false;
+        lossesHtml.textContent = lossesCount;
+        console.log(lossesCount)
+        document.getElementById("yodaAudio").pause();
+        document.getElementById("blasterAudio").play();
+        alert("You Lost!")
+        document.getElementById("blasterAudio").pause();
+        newGame()
+      }
+    }, 200)
+
+
   } else {
     if (!gameRunning) {
       alert("click new game");
@@ -71,33 +98,9 @@ function letterGuess(letter) {
       alert("you've already guessed this letter");
     }
   }
-
 }
 
 
-//check losses..
-function checkLoss() {
-  if (guessesLeft === 0) {
-    lossesCount++;
-    gameRunning = false;
-    lossesHtml.textContent = lossesCount;
-    placeholders.textContent = pickedCharacterName
-  }
-  //if(lossesCount){// Your condition <can't make this work>
-  //document.getElementById("yodaAudio").play(); // Location t
-}
-checkWin();
-//check wins
-function checkWin() {
-  if (pickedCharacterName.toLowerCase() === pickedWordPlaceholderArr.join('').toLowerCase) {
-    winsCount++;
-    gameRunning = false;
-    winsHtml.textContent = winsCount;
-  }
-  //if(winsCount){// Your condition <can't make this work>
-  //document.getElementById("blasterAudio").play(); // Location t
-
-}
 
 //incorrect letter
 function checkIncorrect(letter) {
@@ -114,19 +117,8 @@ function checkIncorrect(letter) {
     guessesLeft.textContent = guessesLeftCounter;
   }
 
-  //play sound when letters are guessed
-
-  // if(guessedLetterBank){// Your condition
-  //   document.getElementById("yodaAudio").play(); // Location to your sound file
-  // }
-
-  // if(incorrectLetterBank){// Your condition
-  //   document.getElementById("dontDoAudio").play(); // Location to your sound file
-  // }
-
 }
 
-checkLoss();
 
 //new game button event listener...
 newGameButton.addEventListener('click', newGame);
@@ -134,14 +126,16 @@ newGameButton.addEventListener('click', newGame);
 document.onkeyup = function(event) {
   if (event.keyCode >= 65 && event.keyCode <= 90) {
     letterGuess(event.key);
+  } else if (event.keyCode === 109 || event.keyCode === 189){
+    letterGuess(event.key);
   }
-}
 
-{
-  window.addEventListener("click", function() {
-    document.getElementById("themesong").play();
-  });
-  window.addEventListener("keyup", function() {
-    document.getElementById("themesong").pause()
-  })
+  // {
+  //   window.addEventListener("click", function() {
+  //     document.getElementById("themesong").play();
+  //   });
+  //   window.addEventListener("keyup", function() {
+  //     document.getElementById("themesong").pause()
+  //   })
+  // }
 }
