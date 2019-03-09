@@ -83,7 +83,7 @@ function checkLoss() {
     lossesHtml.textContent = lossesCount;
     placeholders.textContent = pickedCharacterName
   }
-  //if(lossesCount){// Your condition
+  //if(lossesCount){// Your condition <can't make this work>
     //document.getElementById("yodaAudio").play(); // Location t
 }
 checkWin();
@@ -95,7 +95,7 @@ function checkWin() {
   gameRunning = false;
   winsHtml.textContent = winsCount;
 }
-//if(winsCount){// Your condition
+//if(winsCount){// Your condition <can't make this work>
   //document.getElementById("blasterAudio").play(); // Location t
 
 }
@@ -105,7 +105,7 @@ function checkIncorrect(letter) {
   if (pickedWordPlaceholderArr.indexOf(letter.toLowerCase()) === -1 &&
   pickedWordPlaceholderArr.indexOf(letter.toUppercase()) === -1);
   {
-    //decreases guesses
+    //decreases guesses counter
     guessesLeft --;
     //adds the incorrect letter to bank
     incorrectLetterBank.push(letter);
