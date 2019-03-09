@@ -103,7 +103,7 @@ function checkWin() {
 //incorrect letter
 function checkIncorrect(letter) {
   if (pickedWordPlaceholderArr.indexOf(letter.toLowerCase()) === -1 &&
-  pickedWordPlaceholderArr.indexOf(letter.toUppercase()) === -1);
+  pickedWordPlaceholderArr.indexOf(letter.toUpperCase()) === -1);
   {
     //decreases guesses counter
     guessesLeft --;
@@ -137,5 +137,6 @@ document.onkeyup = function(event) {
   }
 }
 
-{ window.addEventListener('click', function () { document.getElementById("themesong").play();
-});}
+{ window.addEventListener("click", function () { document.getElementById("themesong").play();});
+  window.addEventListener("keyup", function(){ document.getElementById("themesong").pause()})
+  }
