@@ -9,7 +9,7 @@ var lossesHtml = document.getElementById('losses');
 var themesong = document.getElementById('themesong');
 
 //Create variables (words, wins, losses, incorrect letters)
-var characterNameBank = ["Darth Vader", "Princess Leia", "Luke Skywalker", "Obi-Wan Kenobi", "Han Solo", "Chewbacca", "Greedo", "Boba Fett", "Jabba the Hutt", "Jar Jar Binks", "Yoda"];
+var characterNameBank = ["Darth Vader", "Princess Leia", "Luke Skywalker", "Obi-Wan Kenobi", "Han Solo", "Chewbacca", "Greedo", "Boba Fett", "Jabba the Hutt", "Jar Jar Binks", "Yoda", "Jango Fett", "Padime Amidala", "Sebula", "Count Dooku", "Admiral Akbar", "Kylo Ren", "Lando", "Darth Maul", "Rey", "Wato", "Emperor Palpatine"];
 var guessesLeftCounter = 10;
 var pickedCharacterName = '';
 var gameRunning = false;
@@ -88,7 +88,7 @@ function letterGuess(letter) {
         document.getElementById("blasterAudio").pause();
         newGame()
       }
-    }, 200)
+    }, 300)
 
 
   } else {
@@ -129,13 +129,12 @@ document.onkeyup = function(event) {
   } else if (event.keyCode === 109 || event.keyCode === 189){
     letterGuess(event.key);
   }
-
-  // {
-  //   window.addEventListener("click", function() {
-  //     document.getElementById("themesong").play();
-  //   });
-  //   window.addEventListener("keyup", function() {
-  //     document.getElementById("themesong").pause()
-  //   })
-  // }
 }
+  {
+     window.addEventListener("click", function() {
+       document.getElementById("themesong").play();
+     });
+     window.addEventListener("keyup", function() {
+       document.getElementById("themesong").pause()
+     })
+   }
