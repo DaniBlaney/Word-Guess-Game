@@ -10,7 +10,7 @@ var themesong = document.getElementById('themesong');
 
 //Create variables (words, wins, losses, incorrect letters)
 var characterNameBank = ["Darth Vader", "Princess Leia", "Luke Skywalker", "Obi-Wan Kenobi", "Han Solo", "Chewbacca", "Greedo", "Boba Fett", "Jabba the Hutt", "Jar Jar Binks", "Yoda"];
-var guessesLeft = 25;
+var guessesLeftCounter = 25;
 var pickedCharacterName = '';
 var gameRunning = false;
 var winsCount = 0;
@@ -23,26 +23,26 @@ var incorrectLetterBank = [];
 function newGame() {
   //resetting all the game info
   gameRunning = true;
-  guessesLeft = 25;
+  guessesLeftCounter = 25;
   guessedLetterBank = [];
   incorrectLetterBank = [];
   pickedWordPlaceholderArr = [];
 
 
-//picking a word
-pickedCharacterName = characterNameBank[Math.floor(Math.random() * characterNameBank.length)];
+  //picking a word
+  pickedCharacterName = characterNameBank[Math.floor(Math.random() * characterNameBank.length)];
 
-for (var i = 0; i < pickedCharacterName.length; i++) {
-  if (pickedCharacterName[i] === ' ') {
-    pickedWordPlaceholderArr.push(' ');
-  } else {
-    pickedWordPlaceholderArr.push('_');
+  for (var i = 0; i < pickedCharacterName.length; i++) {
+    if (pickedCharacterName[i] === ' ') {
+      pickedWordPlaceholderArr.push(' ');
+    } else {
+      pickedWordPlaceholderArr.push('_');
+    }
   }
-}
 
-guessesLeft.textContent = guessesLeft;
-placeholders.textContent = pickedWordPlaceholderArr.join('');
-guessedLetters.textContent = incorrectLetterBank;
+  guessesLeft.textContent = guessesLeftCounter;
+  placeholders.textContent = pickedWordPlaceholderArr.join('');
+  guessedLetters.textContent = incorrectLetterBank;
 
 }
 
@@ -53,49 +53,48 @@ function letterGuess(letter) {
 
   if (gameRunning === true && guessedLetterBank.indexOf(letter) === -1) {
     guessedLetterBank.push(letter);
-//checks if letter is in my character name
+    //checks if letter is in my character name
     for (var i = 0; i < pickedCharacterName.length; i++) {
       if (pickedCharacterName[i].toLowerCase() === letter.toLowerCase()) {
         pickedWordPlaceholderArr[i] = pickedCharacterName[i];
+        document.getElementById("yodaAudio").play(); // Location t
       }
     }
 
-  placeholders.textContent = pickedWordPlaceholderArr.join('');
-  checkIncorrect(letter);
+    placeholders.textContent = pickedWordPlaceholderArr.join('');
+    checkIncorrect(letter);
 
-  }
-  else {
-    if (!gameRunning){
+  } else {
+    if (!gameRunning) {
       alert("click new game");
     } else {
-        alert("you've already guessed this letter");
-      }
+      alert("you've already guessed this letter");
     }
-
   }
+
+}
 
 
 //check losses..
 function checkLoss() {
-  if (guessesLeft === 0){
+  if (guessesLeft === 0) {
     lossesCount++;
     gameRunning = false;
     lossesHtml.textContent = lossesCount;
     placeholders.textContent = pickedCharacterName
   }
   //if(lossesCount){// Your condition <can't make this work>
-    //document.getElementById("yodaAudio").play(); // Location t
+  //document.getElementById("yodaAudio").play(); // Location t
 }
 checkWin();
 //check wins
 function checkWin() {
-  if (pickedCharacterName.toLowerCase()=== pickedWordPlaceholderArr.join('').toLowerCase)
-{
-  winsCount++;
-  gameRunning = false;
-  winsHtml.textContent = winsCount;
-}
-//if(winsCount){// Your condition <can't make this work>
+  if (pickedCharacterName.toLowerCase() === pickedWordPlaceholderArr.join('').toLowerCase) {
+    winsCount++;
+    gameRunning = false;
+    winsHtml.textContent = winsCount;
+  }
+  //if(winsCount){// Your condition <can't make this work>
   //document.getElementById("blasterAudio").play(); // Location t
 
 }
@@ -104,26 +103,26 @@ function checkWin() {
 function checkIncorrect(letter) {
   //checks if letter is in wordplaceholderarr both capital and lowercase letters
   if (pickedWordPlaceholderArr.indexOf(letter.toLowerCase()) === -1 &&
-  pickedWordPlaceholderArr.indexOf(letter.toUpperCase()) === -1)
-  {
+    pickedWordPlaceholderArr.indexOf(letter.toUpperCase()) === -1) {
     //decreases guesses counter
-    guessesLeft --;
+    guessesLeftCounter--;
     //adds the incorrect letter to bank
     incorrectLetterBank.push(letter);
     guessedLetters.textContent = incorrectLetterBank.join(' ');
     //writes how many guesses left to dom
-    guessesLeft.textContent = guessesLeft;
+    document.getElementById("dontDoAudio").play();
+    guessesLeft.textContent = guessesLeftCounter;
   }
 
   //play sound when letters are guessed
 
-if(guessedLetterBank){// Your condition
-  document.getElementById("yodaAudio").play(); // Location to your sound file
-}
+  // if(guessedLetterBank){// Your condition
+  //   document.getElementById("yodaAudio").play(); // Location to your sound file
+  // }
 
-if(incorrectLetterBank){// Your condition
-  document.getElementById("dontDoAudio").play(); // Location to your sound file
-}
+  // if(incorrectLetterBank){// Your condition
+  //   document.getElementById("dontDoAudio").play(); // Location to your sound file
+  // }
 
 }
 
@@ -138,6 +137,11 @@ document.onkeyup = function(event) {
   }
 }
 
-{ window.addEventListener("click", function () { document.getElementById("themesong").play();});
-  window.addEventListener("keyup", function(){ document.getElementById("themesong").pause()})
-  }
+{
+  window.addEventListener("click", function() {
+    document.getElementById("themesong").play();
+  });
+  window.addEventListener("keyup", function() {
+    document.getElementById("themesong").pause()
+  })
+}
