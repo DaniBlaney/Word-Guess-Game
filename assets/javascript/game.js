@@ -83,8 +83,8 @@ function checkLoss() {
     lossesHtml.textContent = lossesCount;
     placeholders.textContent = pickedCharacterName
   }
-  if(lossesCount){// Your condition
-    document.getElementById("yodaAudio").play(); // Location t
+  //if(lossesCount){// Your condition
+    //document.getElementById("yodaAudio").play(); // Location t
 }
 checkWin();
 //check wins
@@ -95,8 +95,8 @@ function checkWin() {
   gameRunning = false;
   winsHtml.textContent = winsCount;
 }
-if(winsCount){// Your condition
-  document.getElementById("blasterAudio").play(); // Location t
+//if(winsCount){// Your condition
+  //document.getElementById("blasterAudio").play(); // Location t
 
 }
 
